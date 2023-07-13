@@ -1,6 +1,8 @@
 #include <stdio.h>
 
+/* Function declaration */
 int pass_betty_checks(void);
+
 /**
  * main - Entry point
  *
@@ -22,7 +24,6 @@ printf("We will write code together and check if it passes the checks.\n");
 
 while (pass_checks == 0)
 {
-
 printf("Writing code...\n");
 
 printf("This is my code that meets the Betty checks.\n");
@@ -35,11 +36,12 @@ printf("Running the Betty style checks...\n");
 if (pass_betty_checks())
 {
 printf("Code passed the Betty checks! Proceeding to the next task.\n");
-pass_checks = 1;
+pass_checks = 0;
 }
 else
 {
 printf("Code did not pass the Betty checks. Starting over.\n");
+return (1);
 }
 }
 
@@ -51,12 +53,11 @@ return (0);
 /**
  * pass_betty_checks - Simulates running the Betty style checks
  *
- * Return: 1 if code passes the checks, 0 otherwise
+ * Return: 0 if code passes the checks, 1 otherwise
  */
 int pass_betty_checks(void)
 {
-
-int passed = 1;
+int passed = 0;
 
 printf("betty i_am_betty.c\n");
 
