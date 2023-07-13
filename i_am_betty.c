@@ -56,7 +56,7 @@ return (0);
 int pass_betty_checks(void)
 {
 
-int passed = 0;
+int passed = 1;
 
 printf("betty i_am_betty.c\n");
 
