@@ -20,7 +20,7 @@ printf("Welcome to our collaborative simple shell project!\n");
 printf("Task 1: Writing code that meets all the Betty checks.\n");
 printf("We will write code together and check if it passes the checks.\n");
 
-while (!pass_checks)
+while (pass_checks == 0)
 {
 
 printf("Writing code...\n");
