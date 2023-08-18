@@ -16,8 +16,8 @@ int print_hello(void);
 void print_prompt(void);
 char *read_line(void);
 char **lsh_split_line(char *line);
-int lsh_cd(char **args);
-int lsh_clear(void);
+void lsh_cd(char **args);
+void lsh_clear(void);
 
 
 #endif /* SHELL_H */
