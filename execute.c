@@ -35,9 +35,8 @@ int execute(char **args)
 	{
 		if (execvp(args[0], args) == -1)
 		{
-			perror("execute");
+			perror(args[0]);
 		}
-
 		exit(EXIT_FAILURE);
 	}
 	else if (pid < 0)
