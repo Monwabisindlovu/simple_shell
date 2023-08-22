@@ -8,11 +8,11 @@
 #include <sys/wait.h>
 
 #define BUFSIZE 1024
+#define TOKEN_DELIMITERS " \t\r\n\a"
 
 /* Function declarations */
 char *read_line(void);
 char **split_line(char *line);
 int execute(char **args);
 
-#endif /* SHELL_H */
-
+#endif

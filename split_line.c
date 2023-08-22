@@ -1,9 +1,5 @@
-#include <stdlib.h>
-#include <string.h>
-
 #include "shell.h"
 
-#define TOKEN_DELIMITERS " \t\r\n\a"
 
 /**
  * split_line - Split a line into tokens.
@@ -13,38 +9,43 @@
  */
 char **split_line(char *line)
 {
-size_t token_count = 0;
-char **tokens = NULL;
-char *token = strtok(line, TOKEN_DELIMITERS);
+	size_t token_count = 0;
+	size_t buffer_size = BUFSIZE;
+	char **tokens = malloc(sizeof(char *) * buffer_size);
+	char *token = strtok(line, TOKEN_DELIMITERS);
 
-if (token == NULL)
-{
-return (NULL);
+	if (tokens == NULL)
+	{
+		perror("split_line");
+		exit(EXIT_FAILURE);
+	}
+
+
+	while (token != NULL)
+	{
+		tokens[token_count] = strdup(token);
+
+		if (tokens[token_count] == NULL)
+		{
+			perror("split_line");
+			exit(EXIT_FAILURE);
+		}
+
+		token_count++;
+
+		if (token_count >= buffer_size)
+		{
+			buffer_size += BUFSIZE;
+			tokens = realloc(tokens, sizeof(char *) * buffer_size);
+			if (tokens == NULL)
+			{
+				perror("split_line");
+				exit(EXIT_FAILURE);
+			}
+		}
+		token = strtok(NULL, TOKEN_DELIMITERS);
+	}
+	tokens[token_count] = NULL;
+
+	return (tokens);
 }
-
-tokens = malloc(sizeof(char *));
-if (tokens == NULL)
-{
-perror("split_line");
-exit(EXIT_FAILURE);
-}
-
-while (token != NULL)
-{
-tokens[token_count] = token;
-token_count++;
-
-tokens = realloc(tokens, (token_count + 1) * sizeof(char *));
-if (tokens == NULL)
-{
-perror("split_line");
-exit(EXIT_FAILURE);
-}
-
-token = strtok(NULL, TOKEN_DELIMITERS);
-}
-
-tokens[token_count] = NULL;
-return (tokens);
-}
-
