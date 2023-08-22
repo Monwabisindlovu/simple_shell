@@ -1,16 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+
+#define main my_main
 
 /**
- * print_hello - prints "Hello, world!" to the standard output
- * Return: the number of bytes written, or -1 on error
+ * my_main - Entry point
+ *
+ * Return: Always 0 (Success)
  */
-int print_hello(void)
+int my_main(void)
 {
-char *str = "Hello, world!\n";
-int len = 0;
+int fd;
 
-while (str[len])
-len++;
-return (write(1, str, len));
+fd = open("holberton", O_CREAT | O_WRONLY | O_TRUNC, 0600);
+if (fd == -1)
+return (1);
+
+write(fd, "Holberton School!\n", 17);
+close(fd);
+
+return (0);
 }
 
