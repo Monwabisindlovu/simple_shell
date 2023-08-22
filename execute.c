@@ -16,9 +16,6 @@
 */
 int execute(char **args)
 {
-	pid_t pid;
-	int status;
-
 	if (args[0] == NULL)
 	{
 		return (1);
@@ -27,25 +24,7 @@ int execute(char **args)
 	if (strcmp(args[0], "exit") == 0)
 	{
 		free(args);
-		return (0);
-	}
-
-	pid = fork();
-	if (pid == 0)
-	{
-		if (execvp(args[0], args) == -1)
-		{
-			perror(args[0]);
-		}
-		exit(EXIT_FAILURE);
-	}
-	else if (pid < 0)
-	{
-		perror("execute");
-	}
-	else
-	{
-		waitpid(pid, &status, WUNTRACED);
+		exit(0);
 	}
 
 	return (1);
