@@ -7,20 +7,31 @@
  */
 int main(void)
 {
-char *line;
-char **args;
-int status;
+	char *line;
+	char **args;
+	int status;
 
-do {
-write(STDOUT_FILENO, "$ ", 2);
-line = read_line();
-args = split_line(line);
-status = execute(args);
+	do {
+		if (isatty(STDIN_FILENO))
+		{
+			write(STDOUT_FILENO, "$ ", 2);
+		}
 
-free(line);
-free(args);
-} while (status);
+		line = read_line();
+		args = split_line(line);
 
-return (0);
+		if (args[0] != NULL)
+		{
+			status = execute(args);
+		}
+		else
+		{
+			status = 1;
+		}
+
+		free(line);
+		free(args);
+	} while (status);
+
+	return 0;
 }
-
