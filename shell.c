@@ -19,19 +19,11 @@ int main(void)
 
 		line = read_line();
 		args = split_line(line);
-
-		if (args[0] != NULL)
-		{
-			status = execute(args);
-		}
-		else
-		{
-			status = 1;
-		}
+		status = execute(args);
 
 		free(line);
 		free(args);
 	} while (status);
 
-	return (0);
+	return 0;
 }
