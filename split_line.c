@@ -20,7 +20,6 @@ char **split_line(char *line)
 		exit(EXIT_FAILURE);
 	}
 
-
 	while (token != NULL)
 	{
 		tokens[token_count] = strdup(token);
@@ -46,6 +45,5 @@ char **split_line(char *line)
 		token = strtok(NULL, TOKEN_DELIMITERS);
 	}
 	tokens[token_count] = NULL;
-
 	return (tokens);
 }
