@@ -1,52 +1,30 @@
-Simple Shell Project - 0x16
-Welcome to the README for the Simple Shell project (0x16)!
+#The Gates of Shell - Simple Shell Project
+#Welcome
+#Welcome to "The Gates of Shell" project, a collaboration between Monwabisi Ndlovu and Wandile Maseko.
 
-Overview
-This project involves creating a simple UNIX command interpreter, commonly known as a shell. The purpose of this shell is to read commands from the user, interpret them, and execute the corresponding programs or commands. The project aims to reinforce your understanding of various programming and engineering concepts, as well as teamwork and learning strategies.
+#Key Guidelines
+#Learning Focus: Prioritize understanding over shortcuts. Write code from scratch after comprehension.
+#Teamwork: Both partners share GitHub commits. Understand every line of code and communicate effectively.
+#Plagiarism Warning: Avoid copying solutions or sharing resources. Cheating will result in zero scores for both partners.
+#Coding Style: Follow Betty style guidelines and avoid memory leaks.
+#Project Scope: Implement built-in commands, logical operators, separators, aliases, and variable replacement.
+#3Learning Goals: Develop Unix shell concepts, C language skills, and effective learning strategies.
+#Project Goals
+#Implement a functional shell that executes commands.
+#Apply Unix shell concepts and history.
+#Handle built-in commands and logical operators.
+#Develop teamwork and collaboration skills.
+#Embrace learning and avoid plagiarism.
+#Resources
+#Unix shell concepts.
+#Thompson shell inspiration.
+#3Ken Thompson's contributions.
+#Starting guide for your shell.
+#Collaboration
+#Collaborate on GitHub with Monwabisi Ndlovu and Wandile Maseko. Both partners must contribute and understand the codebase.
+#Focus on learning rather than copying solutions.
 
-Project Details
-Project Type: Group Project
-Project Partners: Monwabisi Ndlovu, Wandile Maseko
-Start Date: August 7, 2023, 6:00 AM
-End Date: August 23, 2023, 6:00 AM
-Checker Release Date: August 21, 2023, 11:16 PM
-Concepts Covered
-In this project, you will explore the following concepts:
+#Remember, at ALX SE, learning to build is the priority. Enjoy creating your Simple Shell and learn along the way!
 
-Creating your own shell
-Basics of programming
-Basics of C
-Thinking like an engineer
-Group work and collaboration
-Learning strategies
-Important Guidelines
-Always write your code from scratch and avoid copying or looking at solutions.
-Do not share or copy code from others, including online resources.
-Embrace the learning process, understanding is key.
-The use of AI tools (like ChatGPT) should be in line with learning objectives.
-Understand and follow the framework provided.
-Learning Objectives
-By the end of this project, you should be able to explain the following concepts:
-
-Key figures in Unix history (original OS, shell, programming language)
-Basics of a shell's operation
-Process IDs (PID) and Parent Process IDs (PPID)
-Environment manipulation
-Difference between functions and system calls
-Creating processes
-Working with PATH to find programs
-Executing other programs with execve system call
-Suspending process execution until child processes terminate
-Understanding "end-of-file" (EOF)
-Avoiding plagiarism and maintaining academic integrity
-Project Requirements
-Use allowed editors: vi, vim, emacs
-Code must compile on Ubuntu 20.04 LTS using gcc with specific flags
-Code should follow the Betty style
-Avoid memory leaks
-Maximum 5 functions per file
-Header files should be include guarded
-Create a README.md explaining your project
-Maintain an AUTHORS file listing contributors
-Implement specific commands and functionalities
-
+#Best regards,
+#Monwabisi and Wandile
