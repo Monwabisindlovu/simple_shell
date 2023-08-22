@@ -12,7 +12,7 @@ char **args;
 int status;
 
 do {
-printf("$ ");
+write(STDOUT_FILENO, "$ ", 2);
 line = read_line();
 args = split_line(line);
 status = execute(args);
