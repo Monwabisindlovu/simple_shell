@@ -25,5 +25,5 @@ int main(void)
 		free(args);
 	} while (status);
 
-	return 0;
+	return (0);
 }
