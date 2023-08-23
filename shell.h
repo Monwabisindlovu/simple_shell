@@ -13,6 +13,7 @@
 char *read_line(void);
 char **split_line(char *line);
 int execute(char **args);
-
+ssize_t getline(char **lineptr, size_t *n, FILE *stream);
+extern char **environ;
+int shell_exit(void);
 #endif /* SHELL_H */
-
