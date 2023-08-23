@@ -1,4 +1,0 @@
-/bin/ls
-/bin/echo Hello, world!
-exit
-

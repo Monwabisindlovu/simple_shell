@@ -10,6 +10,8 @@
 
 #define BUFSIZE 1024
 #define TOKEN_DELIMITERS " \t\r\n\a"
+extern char **environ;
+
 
 /* Function declarations */
 char *read_line(void);

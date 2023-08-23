@@ -16,6 +16,8 @@
  */
 int execute(char **args)
 {
+	pid_t pid;
+
 	if (args[0] == NULL)
 	{
 		return (1);
@@ -26,5 +28,23 @@ int execute(char **args)
 		free(args);
 		exit(0);
 	}
+	pid = fork();
+	if (pid == 0)
+	{
+		execve(args[0], args, environ);
+		perror("execute");
+		exit(EXIT_FAILURE);
+	}
+	else if (pid < 0)
+	{
+		perror("fork");
+	}
+	else
+	{
+		int status;
+
+		waitpid(pid, &status, 0);
+	}
+
 	return (1);
 }
