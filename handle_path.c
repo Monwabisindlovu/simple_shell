@@ -10,11 +10,17 @@ char *get_path(char *command)
 {
 	char *path = getenv("PATH");
 	char *dir;
-	char *full_path = malloc(sizeof(char) *1024);
+	char *full_path = malloc(sizeof(char) * MAX_INPUT_BUFFERSIZE);
+
+	if (full_path == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
 
 	while ((dir = strsep(&path, ":")) != NULL)
 	{
-		snprintf(full_path, 1024, "%s/%s", dir, command);
+		snprintf(full_path, MAX_INPUT_BUFFSIZE, "%s/%s", dir, command);
 		if (access(full_path, F_OK) == 0)
 		{
 			return (full_path);

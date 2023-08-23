@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <signal.h>
 
-#define BUFFER_SIZE 1024
+#define MAX_INPUT_BUFFSIZE 1024
 
 extern char **environ;
 
@@ -22,7 +22,7 @@ char *read_line(void);
 char **split_line(char *line);
 char *get_path(char *command);
 int execute(char *cmd_path, char **args);
-void print_environment(void);
+int print_environment(void);
 int shell_exit(void);
 
 #endif

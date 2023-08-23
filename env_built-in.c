@@ -1,20 +1,31 @@
 #include "shell.h"
 
 /**
- *shell_env - Print environment variables.
+ *print_environment - Print environment variables.
  *
  *Return: Always returns 1 to continue shell loop.
  */
-void print_environment(void)
+int print_environment(void)
 {
 	char **env = environ;
+	ssize_t len = strlen(*env);
 
 	while (*env != NULL)
 	{
-		size_t len = strlen(*env);
+		if (write(STDOUT_FILENO, *env, len) != len)
+		{
+			perror("write");
+			return (0);
+		}
 
-		write(STDOUT_FILENO, *env, len);
-		write(STDOUT_FILENO, "\n", 1);
+		if (write(STDOUT_FILENO, "\n", 1) != 1)
+		{
+			perror("write");
+			return (0);
+		}
+
 		env++;
 	}
+
+	return (1);
 }
