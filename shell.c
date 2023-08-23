@@ -11,14 +11,12 @@ int main(void)
 	char **args;
 	int status;
 
-	do {
-		if (isatty(STDIN_FILENO))
-		{
+	if (isatty(STDIN_FILENO))
+	{
+		do {
 			write(STDOUT_FILENO, "$ ", 2);
-		}
-
-		line = read_line();
-		args = split_line(line);
+			line = read_line();
+			args = split_line(line);
 
 		if (args[0] != NULL)
 		{
@@ -28,10 +26,24 @@ int main(void)
 		{
 			status = 1;
 		}
-
 		free(line);
 		free(args);
-	} while (status);
-
+		} while (status);
+	}
+	else
+	{
+		line = read_line();
+		args = split_line(line);
+		if (args[0] != NULL)
+		{
+			status = execute(args);
+		}
+		else
+		{
+			status = 1;
+		}
+		free(line);
+		free(args);
+	}
 	return (0);
 }
