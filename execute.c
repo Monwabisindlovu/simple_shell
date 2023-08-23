@@ -13,18 +13,29 @@
  * @args: An array of pointers to command and arguments.
  * Return: 1 if the shell should continue running, 0
  * if the shell should exit.
-*/
+ */
 int execute(char **args)
 {
-	if (args[0] == NULL)
-	{
-		return (1);
-	}
+	pid_t pid;
+	int status;
 
-	if (strcmp(args[0], "exit") == 0)
+	pid = fork();
+	if (pid == 0)
 	{
-		free(args);
-		exit(0);
+		if (execve(args[0], args, NULL) == -1)
+		{
+			perror("execute");
+		}
+
+		exit(EXIT_FAILURE);
+	}
+	else if (pid < 0)
+	{
+		perror("execute");
+	}
+	else
+	{
+		waitpid(pid, &status, WUNTRACED);
 	}
 
 	return (1);

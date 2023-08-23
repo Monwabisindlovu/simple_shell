@@ -10,12 +10,14 @@
 char **split_line(char *line)
 {
 	size_t token_count = 0;
-	char **tokens = malloc(sizeof(char*));
+	size_t tokens_size = 1;
+	char **tokens = malloc(sizeof(char *));
 	char *token = strtok(line, TOKEN_DELIMITERS);
 
 	if (token == NULL)
 	{
-		return NULL;
+		perror("split_line");
+		exit(EXIT_FAILURE);
 	}
 
 	while (token != NULL)
@@ -23,10 +25,20 @@ char **split_line(char *line)
 		tokens[token_count] = token;
 		token_count++;
 
-		tokens = realloc(tokens, (token_count + 1) *sizeof(char*));
+		if (token_count >= tokens_size)
+		{
+			tokens_size *= 2;
+			tokens = realloc(tokens, tokens_size * sizeof(char *));
+			if (tokens == NULL)
+			{
+				perror("split_line");
+				exit(EXIT_FAILURE);
+			}
+		}
+
 		token = strtok(NULL, TOKEN_DELIMITERS);
 	}
 
 	tokens[token_count] = NULL;
-	return tokens;
+	return (tokens);
 }
