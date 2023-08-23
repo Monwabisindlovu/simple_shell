@@ -10,7 +10,7 @@ char *get_path(char *command)
 {
 	char *path = getenv("PATH");
 	char *dir;
-	char *full_path = malloc(sizeof(char) * MAX_INPUT_BUFFERSIZE);
+	char *full_path = malloc(sizeof(char) * MAX_INPUT_BUFFSIZE);
 
 	if (full_path == NULL)
 	{

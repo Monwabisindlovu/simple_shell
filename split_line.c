@@ -8,7 +8,6 @@
  */
 char **split_line(char *line)
 {
-	size_t i = 0;
 	size_t token_count = 0;
 	size_t token_size = 10;
 	char **tokens = malloc(token_size* sizeof(char*));
@@ -43,12 +42,6 @@ char **split_line(char *line)
 		token = strtok(NULL, TOKEN_DELIMITERS);
 	}
 
-	tokens[token_count] = NULL;
-	for (i = 0; i < token_count; i++)
-	{
-		free(tokens[i]);
-	}
-
-	free(tokens);
+	tokens[token_count] = (NULL);
 	return (tokens);
 }

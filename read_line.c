@@ -10,10 +10,9 @@ char *read_line(void)
 {
 	char *line = NULL;
 	size_t buffer_size = 0;
-	int len;
-	char *copy = strdup(line);
+	ssize_t len;
 
-	if ((getline(&line, &buffer_size, stdin)) == -1)
+	if ((len = getline(&line, &buffer_size, stdin)) == -1)
 	{
 		if (feof(stdin))
 		{
@@ -27,13 +26,10 @@ char *read_line(void)
 			exit(EXIT_FAILURE);
 		}
 	}
-
-	len = strlen(line);
 	if (len > 0 && line[len - 1] == '\n')
 	{
 		line[len - 1] = '\0';
 	}
 
-	free(line);
-	return (copy);
+	return (line);
 }
