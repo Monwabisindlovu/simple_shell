@@ -1,5 +1,6 @@
 #include "shell.h"
 
+
 /**
  * main - Entry point
  *
@@ -27,6 +28,13 @@ if (strcmp(args[0], "exit") == 0)
 free(line);
 free(args);
 exit(0);
+}
+else if (strcmp(args[0], "env") == 0)
+{
+write_env();
+free(line);
+free(args);
+continue;
 }
 status = execute(args);
 

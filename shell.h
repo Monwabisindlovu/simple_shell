@@ -9,9 +9,13 @@
 
 #define BUFSIZE 1024
 
+extern char **environ;
+
 /* Function declarations */
 char *read_line(void);
 char **split_line(char *line);
 int execute(char **args);
+void write_env(void);
+void print_env(void);
 
 #endif
