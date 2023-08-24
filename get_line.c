@@ -81,6 +81,13 @@ available = nread;
 total += read_from_buffer(lineptr, n, buffer, &p, &available);
 if ((*lineptr)[total - 1] == '\n')
 break;
+if (total + BUFFER_SIZE >= *n) /* Check if the buffer is full */
+{
+*n += BUFFER_SIZE; /* Increase the buffer size */
+*lineptr = realloc(*lineptr, *n); /* Reallocate memory for the input line */
+if (*lineptr == NULL) /* If memory allocation fails */
+return (-1); /* Return -1 to indicate failure */
+}
 }
 if (nread == -1 || (nread == 0 && total == 0))
 return (-1);
