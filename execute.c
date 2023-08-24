@@ -1,71 +1,91 @@
 #include "shell.h"
 
 /**
- * execute_command - Execute a command using execve and handle child processes.
- * @cmd_path: The full path of the command to execute.
- * @args: An array of strings containing the command and its arguments.
+ * is_executable_cmd - Determines if a file is an executable command or not.
+ * @info: Info structure
+ * @path: Path to the file
  *
- * Return: The exit status of the executed command.
+ * Return: (1) if true, (0) otherwise
  */
-int execute_command(char *cmd_path, char **args)
+int is_executable_cmd(info_t *info, char *path)
 {
-	pid_t pid;
-	int status;
+	struct stat st;
 
-	pid = fork();
-	if (pid == 0)
+	(void) info;
+	if (!path || stat(path, &st))
+		return (0);
+
+	if (st.st_mode & S_IFREG)
 	{
-		if (execve(cmd_path, args, environ) == -1)
-		{
-			perror("execute_command");
-			exit(EXIT_FAILURE);
-		}
-	}
-	else if (pid < 0)
-	{
-		perror("execute_command");
-	}
-	else
-	{
-		waitpid(pid, &status, WUNTRACED);
+		return (1);
 	}
 
-	return (status);
+	return (0);
 }
 
 /**
- * execute - Execute a command with its arguments.
+ * duplicate_characters - Duplicates characters within a range.
+ * @path_str: The PATH to the string
+ * @start: Starting index
+ * @stop: Stopping index
  *
- * @cmd_path: The full path of the command to execute.
- * @args: An array of strings containing the command and its arguments.
- *
- * Return: The exit status of the executed command.
+ * Return: Pointer to the new buffer.
  */
-int execute(char *cmd_path, char **args)
+char *duplicate_characters(char *path_str, int start, int stop)
 {
-	int status = execute_command(cmd_path, args);
+	static char buf[1024];
+	int i = 0, k = 0;
 
-	if (args[0] == NULL)
+	for (k = 0, i = start; i < stop; i++)
+		if (path_str[i] != ':')
+			buf[k++] = path_str[i];
+	buf[k] = 0;
+	return (buf);
+}
+
+/**
+ * find_cmd_in_path - Finds a command in the PATH string
+ * @info: Info structure
+ * @path_str: The PATH to the string
+ * @cmd: The command to find it.
+ *
+ * Return: Full path of cmd if found, or (NULL)
+ */
+char *find_cmd_in_path(info_t *info, char *path_str, char *cmd)
+{
+	int i = 0, curr_pos = 0;
+	char *path;
+
+	if (!path_str)
+		return (NULL);
+	if ((_strlen(cmd) > 2) && starts_with(cmd, "./"))
 	{
-		return (1);
+		if (is_executable_cmd(info, cmd))
+			return (cmd);
 	}
 
-	if (strcmp(args[0], "exit") == 0)
+	while (1)
 	{
-		free(args);
-		_exit(0);
+		if (!path_str[i] || path_str[i] == ':')
+		{
+			path = duplicate_characters(path_str, curr_pos, i);
+			if (!*path)
+				_strcat(path, cmd);
+			else
+			{
+				_strcat(path, "/");
+				_strcat(path, cmd);
+			}
+
+			if (is_executable_cmd(info, path))
+				return (path);
+			if (!path_str[i])
+				break;
+			curr_pos = i;
+		}
+
+		i++;
 	}
 
-	if (cmd_path == NULL)
-	{
-		char error_message[] = "Command not found: ";
-
-		write(STDERR_FILENO, error_message, strlen(error_message));
-		write(STDERR_FILENO, args[0], strlen(args[0]));
-		write(STDERR_FILENO, "\n", 1);
-		return (1);
-	}
-
-	return (status);
-
+	return (NULL);
 }
