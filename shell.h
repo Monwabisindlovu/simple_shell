@@ -21,5 +21,8 @@ int change_dir(char **args);
 extern char **environ;
 int print_env(char **args);
 int change_dir(char **args);
+char *find_executable(char *command);
+int execute_builtin(char **args);
+
 #endif
 
