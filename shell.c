@@ -22,6 +22,12 @@ if (line == NULL)
 break;
 }
 args = split_line(line);
+if (strcmp(args[0], "exit") == 0)
+{
+free(line);
+free(args);
+exit(0);
+}
 status = execute(args);
 
 free(line);
