@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+<<<<<<< HEAD
 #include <string.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -167,5 +168,15 @@ void check_chain(info_t *, char *, size_t *, size_t, size_t);
 int replace_alias(info_t *);
 int replace_vars(info_t *);
 int replace_str(char **, char *);
+=======
+#include <sys/wait.h>
+
+#define BUFSIZE 1024
+
+/* Function declarations */
+char *read_line(void);
+char **split_line(char *line);
+int execute(char **args);
+>>>>>>> 2ae2b796315b789e045bde6385055475f2aa2a32
 
 #endif

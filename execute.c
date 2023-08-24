@@ -1,6 +1,14 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
 #include "shell.h"
 
 /**
+<<<<<<< HEAD
  * is_executable_cmd - Determines if a file is an executable command or not.
  * @info: Info structure
  * @path: Path to the file
@@ -88,4 +96,36 @@ char *find_cmd_in_path(info_t *info, char *path_str, char *cmd)
 	}
 
 	return (NULL);
+=======
+ * execute - Execute a command with arguments.
+ *
+ * @args: An array of pointers to command and arguments.
+ * Return: 1 if the shell should continue running, 0
+ * if the shell should exit.
+ */
+int execute(char **args)
+{
+pid_t pid;
+int status;
+
+pid = fork();
+if (pid == 0)
+{
+if (execvp(args[0], args) == -1)
+{
+perror("execute");
+}
+exit(EXIT_FAILURE);
+}
+else if (pid < 0)
+{
+perror("execute");
+}
+else
+{
+waitpid(pid, &status, WUNTRACED);
+}
+
+return (1);
+>>>>>>> 2ae2b796315b789e045bde6385055475f2aa2a32
 }
