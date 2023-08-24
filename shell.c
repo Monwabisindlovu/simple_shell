@@ -29,6 +29,13 @@ free(line);
 free(args);
 exit(0);
 }
+else if (strcmp(args[0], "cd") == 0)
+{
+cd_builtin(args);
+free(line);
+free(args);
+continue;
+}
 else if (strcmp(args[0], "env") == 0)
 {
 write_env();
@@ -37,10 +44,8 @@ free(args);
 continue;
 }
 status = execute(args);
-
 free(line);
 free(args);
 } while (status);
-
 return (0);
 }
